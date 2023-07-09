@@ -11,32 +11,107 @@ datasource db {
 }
 
 model User {
-  id String @id @default(uuid())
-  email String @unique
-  name String
+  id         String   @id @default(uuid())
+  name       String
+  email      String   @unique
+  password   String
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
-  movie_rent MovieRent[] @relation("user")
+
+  pets Pet[]
 
   @@map("users")
 }
 
-model Movie {
-  id String @id @default(uuid())
-  title String @unique
-  duration Int
-  release_date DateTime
-  movie_rent MovieRent[] @relation("movie")
+model Pet {
+  id       String  @id @default(uuid())
+  userId   String
+  name     String
+  age      Int
+  breed    String
+  sex      Boolean
+  collarId String  @unique
 
-  @@map("movies")
+  user   User?   @relation(fields: [userId], references: [id])
+  collar Collar? @relation(fields: [collarId], references: [id])
+
+  stress       Stress[]
+  gps          GPS[]
+  sound        Sound[]
+  acelerometer Acelerometer[]
+  hearRate     HeartRate[]
+
+  @@map("pets")
 }
 
-model MovieRent {
-  user User @relation("user", fields: [userId], references: [id])
-  userId String
-  movie Movie @relation("movie", fields: [movieId], references: [id])
-  movieId String
+model Collar {
+  id String @id @default(uuid())
 
-  @@id([userId, movieId])
-  @@map("movie_rent")
+  pet Pet?
+
+  @@map("collars")
+}
+
+model Stress {
+  id             String @id @default(uuid())
+  petId          String
+  soundId        String @unique
+  acelerometerId String @unique
+  heartRateId    String @unique
+  totalValue     String
+
+  pet Pet? @relation(fields: [petId], references: [id])
+  sound Sound? @relation(fields: [soundId], references: [id])
+  acelerometer Acelerometer? @relation(fields: [acelerometerId], references: [id])
+  heartRate HeartRate? @relation(fields: [heartRateId], references: [id])
+
+  @@map("stresses")
+}
+
+model GPS {
+  id        String @id @default(uuid())
+  petId     String
+  latitude  String
+  longitude String
+  locale    String
+
+  pet Pet? @relation(fields: [petId], references: [id])
+
+  @@map("gps")
+}
+
+model Sound {
+  id    String @id @default(uuid())
+  petId String
+  value Int
+
+  pet Pet? @relation(fields: [petId], references: [id])
+
+  stress Stress?
+
+  @@map("sounds")
+}
+
+model Acelerometer {
+  id    String @id @default(uuid())
+  petId String
+  value String
+
+  pet Pet? @relation(fields: [petId], references: [id])
+
+  stress Stress?
+
+  @@map("acelerometers")
+}
+
+model HeartRate {
+  id    String @id @default(uuid())
+  petId String
+  value Int
+
+  pet Pet? @relation(fields: [petId], references: [id])
+
+  stress Stress?
+
+  @@map("heart-rates")
 }
