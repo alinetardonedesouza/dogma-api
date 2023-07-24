@@ -15,7 +15,22 @@ export class UserController {
         const result = await userUseCases.create({ name, email, password });
 
         return res.status(201).json(result);
+    }
 
+    async update(req: Request, res: Response) {
+        
+        const { id } = req.params;
+        const { data } = req.body;
+
+        if (!id) {
+            throw new Error("Invalid params")
+        }
+
+        const userUseCases = new UsersUseCase()
+
+        const result = await userUseCases.update({id, data})
+
+        return res.status(200).json(result)
     }
 
     async getUser(req: Request, res: Response) {
@@ -41,6 +56,4 @@ export class UserController {
 
         return res.status(200).json(result)
     }
-
-
 }

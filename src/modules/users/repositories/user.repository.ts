@@ -13,6 +13,17 @@ export async function createUser(name: string, email: string, password: string):
   return user;
 }
 
+export async function updateUser(id: string, data: JSON): Promise<User> {
+  const updateUser = await prisma.user.update({
+    where: {
+      id,
+    },
+    data,
+  })
+
+  return updateUser
+}
+
 export async function deleteUser(userId: string): Promise<User> {
   const user = await prisma.user.delete({
     where: {

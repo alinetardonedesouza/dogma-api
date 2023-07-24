@@ -2,7 +2,8 @@ import { User } from "@prisma/client";
 import { CreateUserDTO } from "../dtos/createUserDTO";
 import { GetUserDTO } from "../dtos/getUserDTO";
 import { AppError } from "../../../errors/AppError";
-import { createUser, deleteUser, findAllUsers, findUserByEmail, findUserById } from "../repositories/user.repository"
+import { createUser, deleteUser, findAllUsers, findUserByEmail, findUserById, updateUser } from "../repositories/user.repository"
+import { UpdateUserDTO } from "../dtos/updateUserDTO";
 
 export class UsersUseCase {
     async create({ name, email, password }: CreateUserDTO): Promise<User> {
@@ -10,25 +11,39 @@ export class UsersUseCase {
         const userAlreadyExists = await findUserByEmail(email as string)
 
         if (userAlreadyExists) {
-            
+
             throw new AppError("User already exists")
         }
-        
+
         const userCreated = await createUser(name as string, email as string, password as string)
 
         return userCreated
     }
 
-    async getUserById({ id }: GetUserDTO): Promise<User> {
+    async update({ id, data }: UpdateUserDTO): Promise<User> {
 
-        const userFinded = await findUserById(id as string)
+        const userFound = await findUserById(id as string)
 
-        if (!userFinded) {
-            
+        if (!userFound) {
+
             throw new AppError("User not found")
         }
 
-        return userFinded
+        const userUpdated = await updateUser(id as string, data as JSON)
+
+        return userUpdated
+    }
+
+    async getUserById({ id }: GetUserDTO): Promise<User> {
+
+        const userFound = await findUserById(id as string)
+
+        if (!userFound) {
+
+            throw new AppError("User not found")
+        }
+
+        return userFound
     }
 
     async getAllUsers(): Promise<User[]> {
@@ -36,7 +51,7 @@ export class UsersUseCase {
         const usersFinded = await findAllUsers()
 
         if (!usersFinded) {
-            
+
             throw new AppError("Users not found")
         }
 
