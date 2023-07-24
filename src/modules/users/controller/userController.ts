@@ -18,7 +18,7 @@ export class UserController {
     }
 
     async update(req: Request, res: Response) {
-        
+
         const { id } = req.params;
         const { data } = req.body;
 
@@ -28,7 +28,22 @@ export class UserController {
 
         const userUseCases = new UsersUseCase()
 
-        const result = await userUseCases.update({id, data})
+        const result = await userUseCases.update({ id, data })
+
+        return res.status(200).json(result)
+    }
+
+    async delete(req: Request, res: Response) {
+
+        const { id } = req.params;
+
+        if (!id) {
+            throw new Error("Invalid params")
+        }
+
+        const userUseCases = new UsersUseCase()
+
+        const result = await userUseCases.delete({ id })
 
         return res.status(200).json(result)
     }

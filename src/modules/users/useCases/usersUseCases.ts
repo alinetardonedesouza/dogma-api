@@ -4,6 +4,7 @@ import { GetUserDTO } from "../dtos/getUserDTO";
 import { AppError } from "../../../errors/AppError";
 import { createUser, deleteUser, findAllUsers, findUserByEmail, findUserById, updateUser } from "../repositories/user.repository"
 import { UpdateUserDTO } from "../dtos/updateUserDTO";
+import { DeleteUserDTO } from "../dtos/deleteUserDTO";
 
 export class UsersUseCase {
     async create({ name, email, password }: CreateUserDTO): Promise<User> {
@@ -32,6 +33,20 @@ export class UsersUseCase {
         const userUpdated = await updateUser(id as string, data as JSON)
 
         return userUpdated
+    }
+
+    async delete({ id }: DeleteUserDTO): Promise<User> {
+
+        const userFound = await findUserById(id as string)
+
+        if (!userFound) {
+
+            throw new AppError("User not found")
+        }
+
+        const userDeleted = await deleteUser(id as string)
+
+        return userDeleted
     }
 
     async getUserById({ id }: GetUserDTO): Promise<User> {
