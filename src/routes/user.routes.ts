@@ -1,9 +1,10 @@
 import { Router } from "express";
-import { CreateUserController } from "../modules/users/controller/createUserController";
+import { UserController } from "../modules/users/controller/userController";
 
-const createUserController = new CreateUserController();
+const createUserController = new UserController();
 const userRoutes = Router();
 
-userRoutes.post("/", createUserController.handle)
+userRoutes.post("/", createUserController.create)
+userRoutes.get("/watch/:id", createUserController.create)
 
 export {userRoutes};
