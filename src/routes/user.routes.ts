@@ -4,7 +4,13 @@ import { UserController } from "../modules/users/controller/userController";
 const createUserController = new UserController();
 const userRoutes = Router();
 
-userRoutes.post("/", createUserController.create)
-userRoutes.get("/watch/:id", createUserController.create)
+userRoutes.route("/")
+  .post(createUserController.create)
+  .get(createUserController.getAllUsers)
 
-export {userRoutes};
+userRoutes.route("/:id")
+  .get(createUserController.getUser)
+  .put(createUserController.update)
+  .delete(createUserController.delete)
+
+export { userRoutes };
