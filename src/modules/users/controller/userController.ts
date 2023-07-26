@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { UsersUseCase } from "../useCases/usersUseCases";
+import { logger } from "../../../../shared/utils/logger";
 
 export class UserController {
     async create(req: Request, res: Response) {

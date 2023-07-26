@@ -5,6 +5,7 @@ import { AppError } from "../../../errors/AppError";
 import { createUser, deleteUser, findAllUsers, findUserByEmail, findUserById, updateUser } from "../repositories/user.repository"
 import { UpdateUserDTO } from "../dtos/updateUserDTO";
 import { DeleteUserDTO } from "../dtos/deleteUserDTO";
+import { logger } from "../../../../shared/utils/logger";
 
 export class UsersUseCase {
     async create({ name, email, password }: CreateUserDTO): Promise<User> {
