@@ -1,5 +1,5 @@
 import { AppError } from "../../../errors/AppError";
-import { logger } from "../../../../shared/utils/logger";
+import { logger } from "../../../utils/logger";
 import { PetRepository } from "../repositories/pets.repository";
 import { CreatePetsProps, DeletePetsProps, GetPetsByCollarIdProps, GetPetsByIdProps, GetPetsByUserIdProps, UpdatePetsProps } from "../dtos/petsDTOs";
 import { Pet } from "@prisma/client";

@@ -1,6 +1,6 @@
 import { Stress } from "@prisma/client";
 import { AppError } from "../../../errors/AppError";
-import { logger } from "../../../../shared/utils/logger";
+import { logger } from "../../../utils/logger";
 import { StressRepository } from "../repositories/stress.repository";
 import { CreateStressProps, DeleteStressProps, GetStressByIdProps, GetStressByPetIdProps, StressProps, UpdateStressProps } from "../dtos/stressDTOs";
 

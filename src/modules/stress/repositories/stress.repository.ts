@@ -1,4 +1,4 @@
-import { prisma } from "../../../prisma/client";
+import { prisma } from "../../../database/prisma/client";
 import { Stress } from "@prisma/client";
 import { CreateStressProps, DeleteStressProps, GetStressByIdProps, GetStressByPetIdProps, UpdateStressProps } from "../dtos/stressDTOs";
 

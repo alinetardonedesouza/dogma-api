@@ -1,4 +1,4 @@
-import { prisma } from "../../../prisma/client";
+import { prisma } from "../../../database/prisma/client";
 import { User } from "@prisma/client";
 
 export async function createUser(name: string, email: string, password: string): Promise<User> {

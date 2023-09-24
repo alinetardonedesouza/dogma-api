@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { logger } from "../../../../shared/utils/logger";
+import { logger } from "../../../utils/logger";
 import { StressUseCase } from "../useCases/stressUseCase";
 
 export class StressController {

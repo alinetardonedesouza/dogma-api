@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { logger } from "../../../../shared/utils/logger";
+import { logger } from "../../../utils/logger";
 import { PetsUseCase } from "../useCases/petsUseCase";
 
 export class PetsController {

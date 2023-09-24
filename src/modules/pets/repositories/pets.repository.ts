@@ -1,4 +1,4 @@
-import { prisma } from "../../../prisma/client";
+import { prisma } from "../../../database/prisma/client";
 import { Pet } from "@prisma/client";
 import { CreatePetsProps, DeletePetsProps, GetPetsByCollarIdProps, GetPetsByIdProps, GetPetsByUserIdProps, UpdatePetsProps } from "../dtos/petsDTOs";
 
