@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { GPSController } from "../controller/stressController";
+import { GPSController } from "../controller/gpsController";
 
 const gpsController = new GPSController();
 const gpsRoutes = Router();
