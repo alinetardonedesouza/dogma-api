@@ -20,6 +20,9 @@ A API disponibiliza as seguintes rotas disponíveis:
 Para mais informações, veja a documentação em http://localhost:3333/api-docs
 
 ## Autores
-Aline Tardone de Souza, Juliana Paola Silva do Nascimento, Lara Vitória de Souza Araújo, Nicolas
-Eduardo de Oliveira Sonoda
-Prof. Dr. Victor Inacio de Oliveira
+Aline Tardone de Souza,
+Juliana Paola Silva do Nascimento, 
+Lara Vitória de Souza Araújo, 
+Nicolas Eduardo de Oliveira Sonoda  
+
+Orientador: Prof. Dr. Victor Inacio de Oliveira
