@@ -10,7 +10,7 @@ import { LoginUserDTO } from "../dtos/loginUserDTO";
 
 export class UsersUseCase {
 
-    async login({ email, password }: LoginUserDTO): Promise<string> {
+    async login({ email, password }: LoginUserDTO): Promise<User> {
 
         const user = await findUserByEmail(email as string)
 
@@ -25,7 +25,7 @@ export class UsersUseCase {
 
         }
 
-        return user.id
+        return user
     }
 
     async create({ name, email, password }: CreateUserDTO): Promise<User> {
