@@ -13,4 +13,7 @@ userRoutes.route("/:id")
   .put(createUserController.update)
   .delete(createUserController.delete)
 
+userRoutes.route("/login")
+  .post(createUserController.login)
+
 export { userRoutes };

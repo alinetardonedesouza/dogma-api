@@ -3,6 +3,21 @@ import { UsersUseCase } from "../useCases/usersUseCases";
 import { logger } from "../../../utils/logger";
 
 export class UserController {
+    async login(req: Request, res: Response) {
+        
+        const { usuario } = req.body
+
+        if (!usuario.email || !usuario.password) {
+            throw new Error("Invalid params")
+        }
+
+        const usersUseCases = new UsersUseCase();
+
+        const userLogged = await usersUseCases.login({ email: usuario.email, password: usuario.password })
+
+        return res.status(201).json(userLogged);
+    }
+
     async create(req: Request, res: Response) {
 
         const { name, email, password } = req.body;

@@ -6,8 +6,28 @@ import { createUser, deleteUser, findAllUsers, findUserByEmail, findUserById, up
 import { UpdateUserDTO } from "../dtos/updateUserDTO";
 import { DeleteUserDTO } from "../dtos/deleteUserDTO";
 import { logger } from "../../../utils/logger";
+import { LoginUserDTO } from "../dtos/loginUserDTO";
 
 export class UsersUseCase {
+
+    async login({ email, password }: LoginUserDTO): Promise<string> {
+
+        const user = await findUserByEmail(email as string)
+
+        if (!user) {
+
+            throw new AppError("Esse usuário não existe.")
+        }
+
+        if (user.password !== password) {
+
+            throw new AppError("As senhas não coincidem")
+
+        }
+
+        return user.id
+    }
+
     async create({ name, email, password }: CreateUserDTO): Promise<User> {
 
         const userAlreadyExists = await findUserByEmail(email as string)
