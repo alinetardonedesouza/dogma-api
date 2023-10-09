@@ -3,15 +3,37 @@ import { logger } from "../../../utils/logger";
 import { PetRepository } from "../repositories/pets.repository";
 import { CreatePetsProps, DeletePetsProps, GetPetsByCollarIdProps, GetPetsByIdProps, GetPetsByUserIdProps, UpdatePetsProps } from "../dtos/petsDTOs";
 import { Pet } from "@prisma/client";
+import { CollarUseCase } from "../../collar/useCases/collarUseCase";
 
 export class PetsUseCase {
 
   async create(data: CreatePetsProps): Promise<Pet> {
 
-    const repositories = new PetRepository()
-    const petCreated = await repositories.createPet(data)
+    try {
 
-    return petCreated
+      const petData = {
+        userId: data.userId,
+        name: data.name,
+        age: data.age,
+        breed: data.breed,
+        sex: data.sex,
+      }
+      const petRepository = new PetRepository()
+      const petCreated = await petRepository.createPet(petData)
+
+      if (petCreated.id && data.token) {
+
+        const collarUseCase = new CollarUseCase()
+        const collarCreated = await collarUseCase.create(petCreated.id, data.token)
+      }
+
+      return petCreated
+
+    } catch (error) {
+
+      throw new AppError(String(error))
+
+    }
   }
 
   async update(props: UpdatePetsProps): Promise<Pet> {
@@ -54,15 +76,16 @@ export class PetsUseCase {
     return petFound
   }
 
-  async getPetsByCollarId(collarId: GetPetsByCollarIdProps): Promise<Pet[]> {
+  // async getPetsByCollarId(collarId: GetPetsByCollarIdProps): Promise<Pet[]> {
 
-    const repositories = new PetRepository()
-    const petFound = await repositories.findPetByCollarId(collarId)
+  //   const repositories = new PetRepository()
+  //   const petFound = await repositories.findPetByCollarId(collarId)
 
-    if (!petFound) {
+  //   if (!petFound) {
 
-      throw new AppError("Not found", 404)
-    }
-    return petFound
-  }
+  //     throw new AppError("Not found", 404)
+  //   }
+
+  //   return petFound
+  // }
 }

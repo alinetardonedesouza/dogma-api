@@ -1,14 +1,12 @@
 import { Collar } from "@prisma/client";
 import { prisma } from "../../../database/prisma/client";
-import { CollarProps } from "../dtos/collarDTOs";
+import { CollarProps, CreateCollarProps } from "../dtos/collarDTOs";
 
 export class CollarRepository {
 
-  async createCollar(petId: string): Promise<Collar> {
+  async createCollar(dataProps: CreateCollarProps): Promise<Collar> {
     const created = await prisma.collar.create({
-      data: {
-        petId
-      }
+      data: dataProps
     });
 
     return created;

@@ -5,15 +5,15 @@ import { PetsUseCase } from "../useCases/petsUseCase";
 export class PetsController {
     async create(req: Request, res: Response) {
 
-        const { userId, name, age, breed, sex, collarId } = req.body;
+        const { userId, name, age, breed, sex, token} = req.body;
 
-        if (!userId || !name || !age || !breed || !sex || !collarId) {
+        if (!userId || !name || !age || !breed || !sex || !token) {
             throw new Error("Paramêtros inválidos")
         }
 
         const petsUseCases = new PetsUseCase();
 
-        const result = await petsUseCases.create({ userId, name, age, breed, sex, collarId });
+        const result = await petsUseCases.create({ userId, name, age, breed, sex, token });
 
         return res.status(201).json(result);
     }
@@ -79,19 +79,19 @@ export class PetsController {
         return res.status(200).json(result);
     }
 
-    async getPetsByCollarId(req: Request, res: Response) {
+    // async getPetsByCollarId(req: Request, res: Response) {
 
-        const { collarId } = req.params;
+    //     const { collarId } = req.params;
 
-        if (!collarId) {
-            throw new Error("Paramêtros inválidos")
-        }
+    //     if (!collarId) {
+    //         throw new Error("Paramêtros inválidos")
+    //     }
 
-        const petsUseCases = new PetsUseCase();
+    //     const petsUseCases = new PetsUseCase();
 
-        const result = await petsUseCases.getPetsByCollarId({ collarId });
+    //     const result = await petsUseCases.getPetsByCollarId({ collarId });
 
-        return res.status(200).json(result);
-    }
+    //     return res.status(200).json(result);
+    // }
 
 }

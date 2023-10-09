@@ -6,10 +6,15 @@ import { CollarRepository } from "../repositories/collar.repository";
 
 export class CollarUseCase {
 
-  async create(petId: string): Promise<Collar> {
+  async create(petId: string, token: string): Promise<Collar> {
+
+    const dataProps = {
+      petId,
+      token
+    }
 
     const repositories = new CollarRepository()
-    const collarCreated = await repositories.createCollar(petId)
+    const collarCreated = await repositories.createCollar(dataProps)
 
     return collarCreated
   }

@@ -14,7 +14,7 @@ export interface CreatePetsProps {
     age: number,
     breed: string,
     sex: boolean,
-    collarId: string,
+    token?: string
 }
 
 export interface UpdatePetsProps {

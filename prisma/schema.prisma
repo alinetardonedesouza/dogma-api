@@ -39,6 +39,7 @@ model Pet {
 
 model Collar {
   id    String @id @default(uuid())
+  token String
   petId String
 
   pet          Pet?           @relation(fields: [petId], references: [id])
