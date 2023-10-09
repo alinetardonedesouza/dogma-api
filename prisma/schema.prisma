@@ -24,94 +24,90 @@ model User {
 }
 
 model Pet {
-  id       String  @id @default(uuid())
-  userId   String
-  name     String
-  age      Int
-  breed    String
-  sex      Boolean
-  collarId String  @unique
+  id     String  @id @default(uuid())
+  userId String
+  name   String
+  age    Int
+  breed  String
+  sex    Boolean
 
-  user   User?   @relation(fields: [userId], references: [id])
-  collar Collar? @relation(fields: [collarId], references: [id])
+  user   User?    @relation(fields: [userId], references: [id])
+  Collar Collar[]
 
+  @@map("pets")
+}
+
+model Collar {
+  id    String @id @default(uuid())
+  petId String
+
+  pet          Pet?           @relation(fields: [petId], references: [id])
   stress       Stress[]
   gps          GPS[]
   sound        Sound[]
   acelerometer Acelerometer[]
   hearRate     HeartRate[]
 
-  @@map("pets")
-}
-
-model Collar {
-  id String @id @default(uuid())
-
-  pet Pet?
-
   @@map("collars")
 }
 
 model Stress {
   id             String @id @default(uuid())
-  petId          String
+  collarId       String
   soundId        String @unique
   acelerometerId String @unique
   heartRateId    String @unique
   totalValue     String
 
-  pet Pet? @relation(fields: [petId], references: [id])
-  sound Sound? @relation(fields: [soundId], references: [id])
+  sound        Sound?        @relation(fields: [soundId], references: [id])
   acelerometer Acelerometer? @relation(fields: [acelerometerId], references: [id])
-  heartRate HeartRate? @relation(fields: [heartRateId], references: [id])
+  heartRate    HeartRate?    @relation(fields: [heartRateId], references: [id])
+  Collar       Collar?       @relation(fields: [collarId], references: [id])
 
   @@map("stresses")
 }
 
 model GPS {
   id        String @id @default(uuid())
-  petId     String
+  collarId  String
   latitude  String
   longitude String
   locale    String
 
-  pet Pet? @relation(fields: [petId], references: [id])
+  Collar Collar? @relation(fields: [collarId], references: [id])
 
   @@map("gps")
 }
 
 model Sound {
-  id    String @id @default(uuid())
-  petId String
-  value Int
-
-  pet Pet? @relation(fields: [petId], references: [id])
+  id       String @id @default(uuid())
+  collarId String
+  value    Int
 
   stress Stress?
+  Collar Collar? @relation(fields: [collarId], references: [id])
 
   @@map("sounds")
 }
 
 model Acelerometer {
-  id    String @id @default(uuid())
-  petId String
-  value String
-
-  pet Pet? @relation(fields: [petId], references: [id])
+  id       String @id @default(uuid())
+  collarId String
+  value    String
 
   stress Stress?
+  Collar Collar? @relation(fields: [collarId], references: [id])
 
   @@map("acelerometers")
 }
 
 model HeartRate {
-  id    String @id @default(uuid())
-  petId String
-  value Int
-
-  pet Pet? @relation(fields: [petId], references: [id])
+  id       String @id @default(uuid())
+  collarId String
+  value    Int
 
   stress Stress?
+  Collar Collar? @relation(fields: [collarId], references: [id])
 
   @@map("heart-rates")
 }
