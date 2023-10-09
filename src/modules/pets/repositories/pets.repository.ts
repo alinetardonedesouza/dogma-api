@@ -53,13 +53,13 @@ export class PetRepository {
     return finded;
   }
 
-  async findPetByCollarId(props: GetPetsByCollarIdProps): Promise<Pet[] | null> {
-    const finded = await prisma.pet.findMany({
-      where: {
-        collarId: props.collarId
-      }
-    });
+  async findPetByCollarId(props: GetPetsByCollarIdProps): Promise<String> {
+    // const finded = await prisma.pet.findMany({
+    //   where: {
+    //     collarId: props.collarId
+    //   }
+    // });
 
-    return finded;
+    return "";
   }
 }

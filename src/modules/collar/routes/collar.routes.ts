@@ -11,5 +11,7 @@ collarRoutes.route("/:id")
   .delete(collarController.delete)
   .get(collarController.getCollarById)
 
-
+collarRoutes.route("/collar/:collarId")
+  .get(collarController.getCollarByPetId)
+  
 export { collarRoutes };

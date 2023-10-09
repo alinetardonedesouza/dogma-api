@@ -6,10 +6,10 @@ import { CollarRepository } from "../repositories/collar.repository";
 
 export class CollarUseCase {
 
-  async create(): Promise<Collar> {
+  async create(petId: string): Promise<Collar> {
 
     const repositories = new CollarRepository()
-    const collarCreated = await repositories.createCollar()
+    const collarCreated = await repositories.createCollar(petId)
 
     return collarCreated
   }
@@ -26,6 +26,19 @@ export class CollarUseCase {
 
     const repositories = new CollarRepository()
     const collarFound = await repositories.findCollarById(id)
+
+    if (!collarFound) {
+
+      throw new AppError("Not found", 404)
+    }
+
+    return collarFound
+  }
+
+  async getCollarByPetId(petId: string): Promise<Collar> {
+
+    const repositories = new CollarRepository()
+    const collarFound = await repositories.findCollarByPetId(petId)
 
     if (!collarFound) {
 

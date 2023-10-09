@@ -4,11 +4,13 @@ import { CollarProps } from "../dtos/collarDTOs";
 
 export class CollarRepository {
 
-  async createCollar(): Promise<Collar> {
+  async createCollar(petId: string): Promise<Collar> {
     const created = await prisma.collar.create({
-      data: ''
+      data: {
+        petId
+      }
     });
-  
+
     return created;
   }
 
@@ -26,6 +28,16 @@ export class CollarRepository {
     const finded = await prisma.collar.findUnique({
       where: {
         id: props.id
+      }
+    });
+
+    return finded;
+  }
+
+  async findCollarByPetId(petId: string): Promise<Collar | null> {
+    const finded = await prisma.collar.findFirst({
+      where: {
+        petId
       }
     });
 

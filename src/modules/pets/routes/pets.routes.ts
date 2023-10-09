@@ -15,7 +15,4 @@ petsRoutes.route("/:id")
 petsRoutes.route("/:userId")
   .get(petController.getPetsByUserId)
 
-petsRoutes.route("/:collarId")
-  .get(petController.getPetsByCollarId)
-
 export { petsRoutes };
