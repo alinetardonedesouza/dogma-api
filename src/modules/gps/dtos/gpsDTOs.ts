@@ -29,8 +29,8 @@ export interface DeleteGPSProps {
     id: string
 }
 
-export interface GetGPSByPetIdProps {
-    petId: string
+export interface GetGPSByUserIdProps {
+    userId: string
 }
 
 export interface GetGPSByIdProps {

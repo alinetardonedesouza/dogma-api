@@ -58,17 +58,17 @@ export class GPSController {
         return res.status(200).json(result)
     }
 
-    async getGPSByPetId(req: Request, res: Response) {
+    async getGPSByUserId(req: Request, res: Response) {
 
-        const { petId } = req.params;
+        const { userId } = req.params;
 
-        if (!petId) {
+        if (!userId) {
             throw new Error("Paramêtros inválidos")
         }
 
         const GpsUseCases = new GPSUseCase();
 
-        const result = await GpsUseCases.getGPSByPetId({ petId });
+        const result = await GpsUseCases.getGPSByUserId(userId);
 
         return res.status(200).json(result);
     }

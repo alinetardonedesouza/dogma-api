@@ -1,6 +1,6 @@
 import { prisma } from "../../../database/prisma/client";
 import { GPS } from "@prisma/client";
-import { CreateGPSProps, DeleteGPSProps, GetGPSByIdProps, GetGPSByPetIdProps, UpdateGPSProps } from "../dtos/gpsDTOs";
+import { CreateGPSProps, DeleteGPSProps, GetGPSByIdProps, UpdateGPSProps } from "../dtos/gpsDTOs";
 
 export class GPSRepository {
 
@@ -33,15 +33,31 @@ export class GPSRepository {
     return deleted;
   }
 
-  async findGPSByPetId(props: GetGPSByPetIdProps): Promise<GPS[] | null> {
-    const finded = await prisma.gPS.findMany({
-      where: {
-        petId: props.petId
+  async getGPSByUserId(userId: string) {
+    const user = await prisma.user.findUnique({
+      where: { id: userId },
+      include: {
+        pets: {
+          include: {
+            Collar: {
+              include: {
+                gps: true
+              }
+            }
+          }
+        }
       }
     });
 
-    return finded;
+    if (!user) {
+      throw new Error('Usuário não encontrado.');
+    }
+
+    const gpsList = user.pets.flatMap((pet) => pet.Collar.flatMap((collar) => collar.gps));
+
+    return gpsList;
   }
+
 
   async findGPSById(props: GetGPSByIdProps): Promise<GPS | null> {
     const finded = await prisma.gPS.findUnique({

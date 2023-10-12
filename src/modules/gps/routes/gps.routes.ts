@@ -12,8 +12,8 @@ gpsRoutes.route("/:id")
   .delete(gpsController.delete)
   .get(gpsController.getGPSById)
 
-gpsRoutes.route("/:petId")
-  .get(gpsController.getGPSByPetId)
+gpsRoutes.route("/user/:userId")
+  .get(gpsController.getGPSByUserId)
 
   
 export { gpsRoutes };

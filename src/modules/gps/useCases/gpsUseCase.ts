@@ -2,7 +2,7 @@ import { GPS } from "@prisma/client";
 import { AppError } from "../../../errors/AppError";
 import { logger } from "../../../utils/logger";
 import { GPSRepository } from "../repositories/gps.repository";
-import { CreateGPSProps, DeleteGPSProps, GetGPSByIdProps, GetGPSByPetIdProps, UpdateGPSProps } from "../dtos/gpsDTOs";
+import { CreateGPSProps, DeleteGPSProps, GetGPSByIdProps, GetGPSByPetIdProps, GetGPSByUserIdProps, UpdateGPSProps } from "../dtos/gpsDTOs";
 
 export class GPSUseCase {
 
@@ -29,10 +29,10 @@ export class GPSUseCase {
     return GPSDeleted
   }
 
-  async getGPSByPetId(petId: GetGPSByPetIdProps): Promise<GPS[]> {
+  async getGPSByUserId(userId: string): Promise<GPS[]> {
 
     const repositories = new GPSRepository()
-    const GPSFound = await repositories.findGPSByPetId(petId)
+    const GPSFound = await repositories.getGPSByUserId(userId)
 
     if (!GPSFound) {
 

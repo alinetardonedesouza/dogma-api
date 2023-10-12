@@ -73,7 +73,6 @@ model GPS {
   collarId  String
   latitude  String
   longitude String
-  locale    String
 
   Collar Collar? @relation(fields: [collarId], references: [id])
 
