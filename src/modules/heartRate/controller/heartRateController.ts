@@ -5,16 +5,16 @@ import { HeartRateUseCase } from "../useCases/heartRateUseCase";
 export class HeartRateController {
     async create(req: Request, res: Response) {
 
-        const { petId, value } = req.body;
+        const { collarId, value } = req.body;
 
-        if (!petId || !value ) {
+        if (!collarId || !value ) {
             throw new Error("Paramêtros inválidos")
         }
 
         const heartRateUseCases = new HeartRateUseCase();
 
         const result = await heartRateUseCases.create({
-            petId,
+            collarId,
             value
         });
 
@@ -52,17 +52,17 @@ export class HeartRateController {
         return res.status(200).json(result)
     }
 
-    async getHeartRateByPetId(req: Request, res: Response) {
+    async getHeartRateByCollarId(req: Request, res: Response) {
 
-        const { petId } = req.params;
+        const { collarId } = req.params;
 
-        if (!petId) {
+        if (!collarId) {
             throw new Error("Paramêtros inválidos")
         }
 
         const heartRateUseCases = new HeartRateUseCase();
 
-        const result = await heartRateUseCases.getHeartRateByPetId({ petId });
+        const result = await heartRateUseCases.getHeartRateByCollarId({ collarId });
 
         return res.status(200).json(result);
     }

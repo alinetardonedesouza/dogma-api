@@ -2,7 +2,7 @@ import { HeartRate } from "@prisma/client";
 import { AppError } from "../../../errors/AppError";
 import { logger } from "../../../utils/logger";
 import { HeartRateRepository } from "../repositories/heartRate.repository";
-import { CreateHeartRateProps, UpdateHeartRateProps, DeleteHeartRateProps, GetHeartRateByPetIdProps, GetHeartRateByIdProps } from "../dtos/heartRateDTOs";
+import { CreateHeartRateProps, UpdateHeartRateProps, DeleteHeartRateProps, GetHeartRateByCollarIdProps, GetHeartRateByIdProps } from "../dtos/heartRateDTOs";
 
 export class HeartRateUseCase {
 
@@ -29,10 +29,10 @@ export class HeartRateUseCase {
     return heartRateDeleted
   }
 
-  async getHeartRateByPetId(petId: GetHeartRateByPetIdProps): Promise<HeartRate[]> {
+  async getHeartRateByCollarId(collarId: GetHeartRateByCollarIdProps): Promise<HeartRate[]> {
 
     const repositories = new HeartRateRepository()
-    const heartRateFound = await repositories.findHeartRateByPetId(petId)
+    const heartRateFound = await repositories.findHeartRateByCollarId(collarId)
 
     if (!heartRateFound) {
 

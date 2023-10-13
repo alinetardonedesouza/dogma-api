@@ -1,11 +1,11 @@
 export interface HeartRateProps {
     id: string,
-    petId: string,
+    collarId: string,
     value: number
 }
 
 export interface CreateHeartRateProps {
-    petId: string,
+    collarId: string,
     value: number
 }
 
@@ -15,7 +15,7 @@ export interface UpdateHeartRateProps {
 }
 
 export interface DataHeartRateProps {
-    petId?: string,
+    collarId?: string,
     value?: number
 }
 
@@ -23,8 +23,8 @@ export interface DeleteHeartRateProps {
     id: string
 }
 
-export interface GetHeartRateByPetIdProps {
-    petId: string
+export interface GetHeartRateByCollarIdProps {
+    collarId: string
 }
 
 export interface GetHeartRateByIdProps {

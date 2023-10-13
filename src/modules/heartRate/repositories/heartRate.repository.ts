@@ -1,6 +1,6 @@
 import { prisma } from "../../../database/prisma/client";
 import { HeartRate } from "@prisma/client";
-import { CreateHeartRateProps, UpdateHeartRateProps, DeleteHeartRateProps, GetHeartRateByPetIdProps, GetHeartRateByIdProps } from "../dtos/heartRateDTOs";
+import { CreateHeartRateProps, UpdateHeartRateProps, DeleteHeartRateProps, GetHeartRateByCollarIdProps, GetHeartRateByIdProps } from "../dtos/heartRateDTOs";
 
 export class HeartRateRepository {
 
@@ -33,10 +33,10 @@ export class HeartRateRepository {
     return deleted;
   }
 
-  async findHeartRateByPetId(props: GetHeartRateByPetIdProps): Promise<HeartRate[] | null> {
+  async findHeartRateByCollarId(props: GetHeartRateByCollarIdProps): Promise<HeartRate[] | null> {
     const finded = await prisma.heartRate.findMany({
       where: {
-        petId: props.petId
+        collarId: props.collarId
       }
     });
 
