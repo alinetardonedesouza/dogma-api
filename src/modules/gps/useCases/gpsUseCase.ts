@@ -2,7 +2,7 @@ import { GPS } from "@prisma/client";
 import { AppError } from "../../../errors/AppError";
 import { logger } from "../../../utils/logger";
 import { GPSRepository } from "../repositories/gps.repository";
-import { CreateGPSProps, DeleteGPSProps, GetGPSByIdProps, GetGPSByPetIdProps, GetGPSByUserIdProps, UpdateGPSProps } from "../dtos/gpsDTOs";
+import { CreateGPSProps, DeleteGPSProps, GetGPSByIdProps, UpdateGPSProps } from "../dtos/gpsDTOs";
 
 export class GPSUseCase {
 

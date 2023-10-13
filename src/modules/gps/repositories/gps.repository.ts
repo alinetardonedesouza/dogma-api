@@ -48,15 +48,18 @@ export class GPSRepository {
         }
       }
     });
-
+  
     if (!user) {
       throw new Error('Usuário não encontrado.');
     }
-
-    const gpsList = user.pets.flatMap((pet) => pet.Collar.flatMap((collar) => collar.gps));
-
+  
+    const gpsList = user.pets
+      .flatMap((pet) => pet.Collar || [])
+      .flatMap((collar) => collar.gps || []);
+  
     return gpsList;
   }
+  
 
 
   async findGPSById(props: GetGPSByIdProps): Promise<GPS | null> {

@@ -6,22 +6,20 @@ export class GPSController {
     async create(req: Request, res: Response) {
 
         const {
-            petId,
+            collarId,
             latitude,
-            longitude,
-            locale } = req.body;
+            longitude } = req.body;
 
-        if (!petId || !latitude || !longitude || !locale) {
+        if (!collarId || !latitude || !longitude) {
             throw new Error("Paramêtros inválidos")
         }
 
         const GpsUseCases = new GPSUseCase();
 
         const result = await GpsUseCases.create({
-            petId,
+            collarId,
             latitude,
-            longitude,
-            locale
+            longitude
         });
 
         return res.status(201).json(result);

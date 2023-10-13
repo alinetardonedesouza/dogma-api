@@ -1,16 +1,14 @@
 export interface GPSProps {
     id: string,
-    petId: string,
+    collarId: string,
     latitude: string,
     longitude: string,
-    locale: string
 }
 
 export interface CreateGPSProps {
-    petId: string,
+    collarId: string,
     latitude: string,
     longitude: string,
-    locale: string
 }
 
 export interface UpdateGPSProps {
@@ -19,10 +17,10 @@ export interface UpdateGPSProps {
 }
 
 export interface DataGPSProps {
-    petId?: string,
+    collarId?: string,
     latitude?: string,
     longitude?: string,
-    locale?: string
+
 }
 
 export interface DeleteGPSProps {
