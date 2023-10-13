@@ -1,6 +1,6 @@
 import { prisma } from "../../../database/prisma/client";
 import { Stress } from "@prisma/client";
-import { CreateStressProps, DeleteStressProps, GetStressByIdProps, GetStressByPetIdProps, UpdateStressProps } from "../dtos/stressDTOs";
+import { CreateStressProps, DeleteStressProps, GetStressByIdProps, GetStressByCollarIdProps, UpdateStressProps } from "../dtos/stressDTOs";
 
 export class StressRepository {
 
@@ -33,10 +33,10 @@ export class StressRepository {
     return deleted;
   }
 
-  async findStressByPetId(props: GetStressByPetIdProps): Promise<Stress[] | null> {
+  async findStressByCollarId(props: GetStressByCollarIdProps): Promise<Stress[] | null> {
     const finded = await prisma.stress.findMany({
       where: {
-        petId: props.petId
+        collarId: props.collarId
       }
     });
 

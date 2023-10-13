@@ -1,6 +1,6 @@
 export interface StressProps {
     id: string,
-    petId: string,
+    collarId: string,
     soundId: string,
     acelerometerId: string,
     heartRateId: string,
@@ -8,7 +8,7 @@ export interface StressProps {
 }
 
 export interface CreateStressProps {
-    petId: string,
+    collarId: string,
     soundId: string,
     acelerometerId: string,
     heartRateId: string,
@@ -21,7 +21,7 @@ export interface UpdateStressProps {
 }
 
 export interface DataStressProps {
-    petId: string,
+    collarId: string,
     soundId: string,
     acelerometerId: string,
     heartRateId: string,
@@ -32,8 +32,8 @@ export interface DeleteStressProps {
     id: string
 }
 
-export interface GetStressByPetIdProps {
-    petId: string
+export interface GetStressByCollarIdProps {
+    collarId: string
 }
 
 export interface GetStressByIdProps {

@@ -5,15 +5,15 @@ import { StressUseCase } from "../useCases/stressUseCase";
 export class StressController {
     async create(req: Request, res: Response) {
 
-        const { petId, soundId, acelerometerId, heartRateId, totalValue } = req.body;
+        const { collarId, soundId, acelerometerId, heartRateId, totalValue } = req.body;
 
-        if (!petId || !soundId || !acelerometerId || !heartRateId || !totalValue) {
+        if (!collarId || !soundId || !acelerometerId || !heartRateId || !totalValue) {
             throw new Error("Paramêtros inválidos")
         }
 
         const stressUseCases = new StressUseCase();
 
-        const result = await stressUseCases.create({ petId, soundId, acelerometerId, heartRateId, totalValue });
+        const result = await stressUseCases.create({ collarId, soundId, acelerometerId, heartRateId, totalValue });
 
         return res.status(201).json(result);
     }
@@ -49,17 +49,17 @@ export class StressController {
         return res.status(200).json(result)
     }
 
-    async getStressByPetId(req: Request, res: Response) {
+    async getStressByCollarId(req: Request, res: Response) {
 
-        const { petId } = req.params;
+        const { collarId } = req.params;
 
-        if (!petId) {
+        if (!collarId) {
             throw new Error("Paramêtros inválidos")
         }
 
         const stressUseCases = new StressUseCase();
 
-        const result = await stressUseCases.getStressByPetId({petId});
+        const result = await stressUseCases.getStressByCollarId({collarId});
 
         return res.status(200).json(result);
     }

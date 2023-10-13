@@ -2,7 +2,7 @@ import { Stress } from "@prisma/client";
 import { AppError } from "../../../errors/AppError";
 import { logger } from "../../../utils/logger";
 import { StressRepository } from "../repositories/stress.repository";
-import { CreateStressProps, DeleteStressProps, GetStressByIdProps, GetStressByPetIdProps, StressProps, UpdateStressProps } from "../dtos/stressDTOs";
+import { CreateStressProps, DeleteStressProps, GetStressByIdProps, GetStressByCollarIdProps, StressProps, UpdateStressProps } from "../dtos/stressDTOs";
 
 export class StressUseCase {
 
@@ -29,10 +29,10 @@ export class StressUseCase {
     return stressDeleted
   }
 
-  async getStressByPetId(petId: GetStressByPetIdProps): Promise<Stress[]> {
+  async getStressByCollarId(collarId: GetStressByCollarIdProps): Promise<Stress[]> {
 
     const repositories = new StressRepository()
-    const stressFound = await repositories.findStressByPetId(petId)
+    const stressFound = await repositories.findStressByCollarId(collarId)
 
     if (!stressFound) {
 

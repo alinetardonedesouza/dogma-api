@@ -12,8 +12,8 @@ heartRateRoutes.route("/:id")
   .delete(heartRateController.delete)
   .get(heartRateController.getHeartRateById)
 
-heartRateRoutes.route("/:petId")
-  .get(heartRateController.getHeartRateByPetId)
+heartRateRoutes.route("/:collarId")
+  .get(heartRateController.getHeartRateByCollarId)
 
   
 export { heartRateRoutes };

@@ -12,8 +12,8 @@ stressRoutes.route("/:id")
   .delete(stressController.delete)
   .get(stressController.getStressById)
 
-stressRoutes.route("/:petId")
-  .get(stressController.getStressByPetId)
+stressRoutes.route("/:collarId")
+  .get(stressController.getStressByCollarId)
 
   
 export { stressRoutes };
