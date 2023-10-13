@@ -4,18 +4,18 @@ import { AcelerometerUseCase } from "../useCases/acelerometerUseCase";
 
 export class AcelerometerController {
     async create(req: Request, res: Response) {
+        logger.info(req.body)
+        const { collarId, x, y, z } = req.body;
 
-        const { petId, value } = req.body;
-
-        if (!petId || !value ) {
+        if (!collarId || !x || !y || !z) {
             throw new Error("Paramêtros inválidos")
         }
 
         const acelerometerUseCases = new AcelerometerUseCase();
 
         const result = await acelerometerUseCases.create({
-            petId,
-            value
+            collarId,
+            x, y, z
         });
 
         return res.status(201).json(result);
@@ -52,17 +52,17 @@ export class AcelerometerController {
         return res.status(200).json(result)
     }
 
-    async getAcelerometerByPetId(req: Request, res: Response) {
+    async getAcelerometerByCollarId(req: Request, res: Response) {
 
-        const { petId } = req.params;
+        const { collarId } = req.params;
 
-        if (!petId) {
+        if (!collarId) {
             throw new Error("Paramêtros inválidos")
         }
 
         const acelerometerUseCases = new AcelerometerUseCase();
 
-        const result = await acelerometerUseCases.getAcelerometerByPetId({ petId });
+        const result = await acelerometerUseCases.getAcelerometerByCollarId({ collarId });
 
         return res.status(200).json(result);
     }

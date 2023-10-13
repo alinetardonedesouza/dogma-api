@@ -2,7 +2,7 @@ import { Acelerometer } from "@prisma/client";
 import { AppError } from "../../../errors/AppError";
 import { logger } from "../../../utils/logger";
 import { AcelerometerRepository } from "../repositories/acelerometer.repository";
-import { CreateAcelerometerProps, UpdateAcelerometerProps, DeleteAcelerometerProps, GetAcelerometerByPetIdProps, GetAcelerometerByIdProps } from "../dtos/acelerometerDTOs";
+import { CreateAcelerometerProps, UpdateAcelerometerProps, DeleteAcelerometerProps, GetAcelerometerByCollarIdProps, GetAcelerometerByIdProps } from "../dtos/acelerometerDTOs";
 
 export class AcelerometerUseCase {
 
@@ -29,10 +29,10 @@ export class AcelerometerUseCase {
     return acelerometerDeleted
   }
 
-  async getAcelerometerByPetId(petId: GetAcelerometerByPetIdProps): Promise<Acelerometer[]> {
+  async getAcelerometerByCollarId(collarId: GetAcelerometerByCollarIdProps): Promise<Acelerometer[]> {
 
     const repositories = new AcelerometerRepository()
-    const acelerometerFound = await repositories.findAcelerometerByPetId(petId)
+    const acelerometerFound = await repositories.findAcelerometerByCollarId(collarId)
 
     if (!acelerometerFound) {
 

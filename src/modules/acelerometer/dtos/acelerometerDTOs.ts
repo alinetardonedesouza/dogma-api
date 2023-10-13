@@ -1,12 +1,16 @@
 export interface AcelerometerProps {
     id: string,
-    petId: string,
-    value: string
+    collarId: string,
+    x: string,
+    y: string,
+    z: string
 }
 
 export interface CreateAcelerometerProps {
-    petId: string,
-    value: string
+    collarId: string,
+    x: string,
+    y: string,
+    z: string
 }
 
 export interface UpdateAcelerometerProps {
@@ -15,7 +19,7 @@ export interface UpdateAcelerometerProps {
 }
 
 export interface DataAcelerometerProps {
-    petId?: string,
+    collarId?: string,
     value?: string
 }
 
@@ -23,8 +27,8 @@ export interface DeleteAcelerometerProps {
     id: string
 }
 
-export interface GetAcelerometerByPetIdProps {
-    petId: string
+export interface GetAcelerometerByCollarIdProps {
+    collarId: string
 }
 
 export interface GetAcelerometerByIdProps {
