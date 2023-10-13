@@ -31,8 +31,8 @@ model Pet {
   breed  String
   sex    Boolean
 
-  user   User?    @relation(fields: [userId], references: [id])
-  Collar Collar[]
+  user   User?   @relation(fields: [userId], references: [id])
+  Collar Collar?
 
   @@map("pets")
 }
@@ -40,9 +40,9 @@ model Pet {
 model Collar {
   id    String @id @default(uuid())
   token String
-  petId String
+  petId String @unique
 
-  pet          Pet?           @relation(fields: [petId], references: [id])
+  pet          Pet            @relation(fields: [petId], references: [id]) // Alterado para ser singular
   stress       Stress[]
   gps          GPS[]
   sound        Sound[]
@@ -93,7 +93,9 @@ model Sound {
 model Acelerometer {
   id       String @id @default(uuid())
   collarId String
-  value    String
+  x        String
+  y        String
+  z        String
 
   stress Stress?
   Collar Collar? @relation(fields: [collarId], references: [id])
