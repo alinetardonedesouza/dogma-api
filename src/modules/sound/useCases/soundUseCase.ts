@@ -2,7 +2,7 @@ import { Sound } from "@prisma/client";
 import { AppError } from "../../../errors/AppError";
 import { logger } from "../../../utils/logger";
 import { SoundRepository } from "../repositories/sound.repository";
-import { CreateSoundProps, UpdateSoundProps, DeleteSoundProps, GetSoundByPetIdProps, GetSoundByIdProps } from "../dtos/soundDTOs";
+import { CreateSoundProps, UpdateSoundProps, DeleteSoundProps, GetSoundByCollarIdProps, GetSoundByIdProps } from "../dtos/soundDTOs";
 
 export class SoundUseCase {
 
@@ -29,10 +29,10 @@ export class SoundUseCase {
     return soundDeleted
   }
 
-  async getSoundByPetId(petId: GetSoundByPetIdProps): Promise<Sound[]> {
+  async getSoundByCollarId(collarId: GetSoundByCollarIdProps): Promise<Sound[]> {
 
     const repositories = new SoundRepository()
-    const soundFound = await repositories.findSoundByPetId(petId)
+    const soundFound = await repositories.findSoundByCollarId(collarId)
 
     if (!soundFound) {
 

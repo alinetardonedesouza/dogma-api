@@ -1,11 +1,11 @@
 export interface SoundProps {
     id: string,
-    petId: string,
+    collarId: string,
     value: number
 }
 
 export interface CreateSoundProps {
-    petId: string,
+    collarId: string,
     value: number
 }
 
@@ -15,7 +15,7 @@ export interface UpdateSoundProps {
 }
 
 export interface DataSoundProps {
-    petId?: string,
+    collarId?: string,
     value?: number
 }
 
@@ -23,8 +23,8 @@ export interface DeleteSoundProps {
     id: string
 }
 
-export interface GetSoundByPetIdProps {
-    petId: string
+export interface GetSoundByCollarIdProps {
+    collarId: string
 }
 
 export interface GetSoundByIdProps {

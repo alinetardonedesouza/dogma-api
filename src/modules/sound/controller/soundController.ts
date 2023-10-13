@@ -5,16 +5,16 @@ import { SoundUseCase } from "../useCases/soundUseCase";
 export class SoundController {
     async create(req: Request, res: Response) {
 
-        const { petId, value } = req.body;
+        const { collarId, value } = req.body;
 
-        if (!petId || !value ) {
+        if (!collarId || !value ) {
             throw new Error("Paramêtros inválidos")
         }
 
         const soundUseCases = new SoundUseCase();
 
         const result = await soundUseCases.create({
-            petId,
+            collarId,
             value
         });
 
@@ -52,17 +52,17 @@ export class SoundController {
         return res.status(200).json(result)
     }
 
-    async getSoundByPetId(req: Request, res: Response) {
+    async getSoundByCollarId(req: Request, res: Response) {
 
-        const { petId } = req.params;
+        const { collarId } = req.params;
 
-        if (!petId) {
+        if (!collarId) {
             throw new Error("Paramêtros inválidos")
         }
 
         const soundUseCases = new SoundUseCase();
 
-        const result = await soundUseCases.getSoundByPetId({ petId });
+        const result = await soundUseCases.getSoundByCollarId({ collarId });
 
         return res.status(200).json(result);
     }

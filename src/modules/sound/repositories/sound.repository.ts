@@ -1,6 +1,6 @@
 import { prisma } from "../../../database/prisma/client";
 import { Sound } from "@prisma/client";
-import { CreateSoundProps, DeleteSoundProps, GetSoundByIdProps, GetSoundByPetIdProps, UpdateSoundProps } from "../dtos/soundDTOs";
+import { CreateSoundProps, DeleteSoundProps, GetSoundByCollarIdProps, GetSoundByIdProps, UpdateSoundProps } from "../dtos/soundDTOs";
 
 export class SoundRepository {
 
@@ -33,10 +33,10 @@ export class SoundRepository {
     return deleted;
   }
 
-  async findSoundByPetId(props: GetSoundByPetIdProps): Promise<Sound[] | null> {
+  async findSoundByCollarId(props: GetSoundByCollarIdProps): Promise<Sound[] | null> {
     const finded = await prisma.sound.findMany({
       where: {
-        petId: props.petId
+        collarId: props.collarId
       }
     });
 
