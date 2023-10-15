@@ -31,7 +31,7 @@ model Pet {
   breed  String
   sex    Boolean
 
-  user   User?   @relation(fields: [userId], references: [id])
+  user   User?   @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   Collar Collar?
 
   @@map("pets")
@@ -42,7 +42,7 @@ model Collar {
   token String
   petId String @unique
 
-  pet          Pet            @relation(fields: [petId], references: [id]) // Alterado para ser singular
+  pet          Pet            @relation(fields: [petId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   stress       Stress[]
   gps          GPS[]
   sound        Sound[]
@@ -60,10 +60,10 @@ model Stress {
   heartRateId    String @unique
   totalValue     String
 
-  sound        Sound?        @relation(fields: [soundId], references: [id])
-  acelerometer Acelerometer? @relation(fields: [acelerometerId], references: [id])
-  heartRate    HeartRate?    @relation(fields: [heartRateId], references: [id])
-  Collar       Collar?       @relation(fields: [collarId], references: [id])
+  sound        Sound?        @relation(fields: [soundId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  acelerometer Acelerometer? @relation(fields: [acelerometerId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  heartRate    HeartRate?    @relation(fields: [heartRateId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  Collar       Collar?       @relation(fields: [collarId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 
   @@map("stresses")
 }
@@ -74,7 +74,7 @@ model GPS {
   latitude  String
   longitude String
 
-  Collar Collar? @relation(fields: [collarId], references: [id])
+  Collar Collar? @relation(fields: [collarId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 
   @@map("gps")
 }
@@ -85,7 +85,7 @@ model Sound {
   value    Int
 
   stress Stress?
-  Collar Collar? @relation(fields: [collarId], references: [id])
+  Collar Collar? @relation(fields: [collarId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 
   @@map("sounds")
 }
@@ -98,7 +98,7 @@ model Acelerometer {
   z        String
 
   stress Stress?
-  Collar Collar? @relation(fields: [collarId], references: [id])
+  Collar Collar? @relation(fields: [collarId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 
   @@map("acelerometers")
 }
@@ -109,7 +109,7 @@ model HeartRate {
   value    Int
 
   stress Stress?
-  Collar Collar? @relation(fields: [collarId], references: [id])
+  Collar Collar? @relation(fields: [collarId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 
   @@map("heart-rates")
 }

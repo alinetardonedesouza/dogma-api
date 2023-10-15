@@ -7,7 +7,7 @@ export class PetsController {
 
         const { userId, name, age, breed, sex, token} = req.body;
 
-        if (!userId || !name || !age || !breed || !sex || !token) {
+        if (!userId || !name || !age || !breed || sex.length === 0 || !token) {
             throw new Error("Paramêtros inválidos")
         }
 
