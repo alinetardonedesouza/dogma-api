@@ -66,7 +66,7 @@ export class PetsController {
 
     async getPetsByUserId(req: Request, res: Response) {
 
-        const { userId } = req.params;
+        const { userId } = req.user;
 
         if (!userId) {
             throw new Error("Paramêtros inválidos")
