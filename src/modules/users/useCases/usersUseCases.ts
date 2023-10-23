@@ -1,4 +1,5 @@
 import { User } from "@prisma/client";
+import * as cache from "../../../http/cache/cacheRepositories";
 import { CreateUserDTO } from "../dtos/createUserDTO";
 import { GetUserDTO } from "../dtos/getUserDTO";
 import { AppError } from "../../../errors/AppError";
@@ -24,6 +25,9 @@ export class UsersUseCase {
             throw new AppError("As senhas não coincidem")
 
         }
+
+        const cacheKey = `user-${user.id}`;
+        await cache.setRedis(cacheKey, user.id);
 
         return user
     }
