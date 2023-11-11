@@ -43,29 +43,11 @@ model Collar {
   petId String @unique
 
   pet          Pet            @relation(fields: [petId], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  stress       Stress[]
   gps          GPS[]
   sound        Sound[]
   acelerometer Acelerometer[]
-  hearRate     HeartRate[]
 
   @@map("collars")
-}
-
-model Stress {
-  id             String @id @default(uuid())
-  collarId       String
-  soundId        String @unique
-  acelerometerId String @unique
-  heartRateId    String @unique
-  totalValue     String
-
-  sound        Sound?        @relation(fields: [soundId], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  acelerometer Acelerometer? @relation(fields: [acelerometerId], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  heartRate    HeartRate?    @relation(fields: [heartRateId], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  Collar       Collar?       @relation(fields: [collarId], references: [id], onDelete: Cascade, onUpdate: Cascade)
-
-  @@map("stresses")
 }
 
 model GPS {
@@ -84,7 +66,6 @@ model Sound {
   collarId String
   value    Int
 
-  stress Stress?
   Collar Collar? @relation(fields: [collarId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 
   @@map("sounds")
@@ -97,19 +78,7 @@ model Acelerometer {
   y        String
   z        String
 
-  stress Stress?
   Collar Collar? @relation(fields: [collarId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 
   @@map("acelerometers")
-}
-
-model HeartRate {
-  id       String @id @default(uuid())
-  collarId String
-  value    Int
-
-  stress Stress?
-  Collar Collar? @relation(fields: [collarId], references: [id], onDelete: Cascade, onUpdate: Cascade)
-
-  @@map("heart-rates")
 }
