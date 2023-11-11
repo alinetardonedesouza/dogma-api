@@ -13,5 +13,8 @@ collarRoutes.route("/:id")
 
 collarRoutes.route("/collar/:collarId")
   .get(collarController.getCollarByPetId)
+
+collarRoutes.route("/token/:token")
+  .get(collarController.getCollarByToken)
   
 export { collarRoutes };

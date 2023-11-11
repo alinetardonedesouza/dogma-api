@@ -15,5 +15,8 @@ gpsRoutes.route("/:id")
 gpsRoutes.route("/user/:userId")
   .get(gpsController.getGPSByUserId)
 
+gpsRoutes.route("/collar/:token")
+  .get(gpsController.getGPSByToken)
+
   
 export { gpsRoutes };

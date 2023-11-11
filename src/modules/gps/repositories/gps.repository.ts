@@ -1,6 +1,6 @@
 import { prisma } from "../../../database/prisma/client";
-import { GPS } from "@prisma/client";
-import { CreateGPSProps, DeleteGPSProps, GetGPSByIdProps, UpdateGPSProps } from "../dtos/gpsDTOs";
+import { Collar, GPS } from "@prisma/client";
+import { CreateGPSProps, DeleteGPSProps, GetGPSByIdProps, GetGPSByTokenProps, UpdateGPSProps } from "../dtos/gpsDTOs";
 
 export class GPSRepository {
 
@@ -70,5 +70,16 @@ export class GPSRepository {
     });
 
     return finded;
+  }
+
+  async findGPSByToken(token: string): Promise<Collar | null> {
+    const collar = await prisma.collar.findFirst({
+      where: { token },
+      include: {
+        gps: true,
+      },
+    });
+
+    return collar;
   }
 }

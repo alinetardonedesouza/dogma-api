@@ -34,3 +34,6 @@ export interface GetGPSByUserIdProps {
 export interface GetGPSByIdProps {
     id: string
 }
+export interface GetGPSBycollarIdProps {
+    collarId: string
+}

@@ -1,23 +1,27 @@
 import { Request, Response } from "express";
 import { logger } from "../../../utils/logger";
 import { GPSUseCase } from "../useCases/gpsUseCase";
+import { CollarUseCase } from "../../collar/useCases/collarUseCase";
 
 export class GPSController {
     async create(req: Request, res: Response) {
 
         const {
-            collarId,
+            token,
             latitude,
             longitude } = req.body;
 
-        if (!collarId || !latitude || !longitude) {
+        if (!token || !latitude || !longitude) {
             throw new Error("Paramêtros inválidos")
         }
+
+        const CollarUseCases = new CollarUseCase()
+        const collar = await CollarUseCases.getCollarByToken(token)
 
         const GpsUseCases = new GPSUseCase();
 
         const result = await GpsUseCases.create({
-            collarId,
+            collarId: collar.id,
             latitude,
             longitude
         });
@@ -82,6 +86,21 @@ export class GPSController {
         const GpsUseCases = new GPSUseCase();
 
         const result = await GpsUseCases.getGPSById({ id });
+
+        return res.status(200).json(result);
+    }
+
+    async getGPSByToken(req: Request, res: Response) {
+
+        const { token } = req.params;
+
+        if (!token) {
+            throw new Error("Paramêtros inválidos")
+        }
+
+        const GpsUseCases = new GPSUseCase();
+
+        const result = await GpsUseCases.getGPSByToken(token);
 
         return res.status(200).json(result);
     }

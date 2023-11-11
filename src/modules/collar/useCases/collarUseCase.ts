@@ -52,4 +52,17 @@ export class CollarUseCase {
 
     return collarFound
   }
+
+  async getCollarByToken(token: string): Promise<Collar> {
+
+    const repositories = new CollarRepository()
+    const collarFound = await repositories.findCollarByToken(token)
+
+    if (!collarFound) {
+
+      throw new AppError("Not found", 404)
+    }
+
+    return collarFound
+  }
 }

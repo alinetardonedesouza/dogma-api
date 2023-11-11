@@ -8,6 +8,7 @@ import { UpdateUserDTO } from "../dtos/updateUserDTO";
 import { DeleteUserDTO } from "../dtos/deleteUserDTO";
 import { logger } from "../../../utils/logger";
 import { LoginUserDTO } from "../dtos/loginUserDTO";
+import { CacheRepository } from "../../cache/cache.repository";
 
 export class UsersUseCase {
 
@@ -26,8 +27,11 @@ export class UsersUseCase {
 
         }
 
-        const cacheKey = `user-${user.id}`;
-        await cache.setRedis(cacheKey, user.id);
+        const cacheRepository = new CacheRepository()
+        await cacheRepository.setUserToCache(user.id)
+
+        // const teste = await cacheRepository.getUserFromCache(user.id)
+        // console.log(teste)
 
         return user
     }

@@ -6,14 +6,14 @@ export class CollarController {
 
     async create(req: Request, res: Response) {
 
-        const { petId } = req.body
+        const { petId, token } = req.body
 
-        if (!petId) {
+        if (!petId || !token) {
             throw new Error("Paramêtros inválidos. PetId faltando.")
         }
 
         const collarUseCases = new CollarUseCase();
-        const result = await collarUseCases.create(petId);
+        const result = await collarUseCases.create(petId,token);
 
         return res.status(201).json(result);
     }
@@ -56,6 +56,20 @@ export class CollarController {
 
         const collarUseCases = new CollarUseCase();
         const result = await collarUseCases.getCollarByPetId(petId);
+
+        return res.status(200).json(result);
+    }
+
+    async getCollarByToken(req: Request, res: Response) {
+
+        const { token } = req.params;
+
+        if (!token) {
+            throw new Error("Paramêtros inválidos")
+        }
+
+        const collarUseCases = new CollarUseCase();
+        const result = await collarUseCases.getCollarByToken(token);
 
         return res.status(200).json(result);
     }

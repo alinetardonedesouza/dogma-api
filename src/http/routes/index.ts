@@ -15,12 +15,12 @@ const routes = Router();
 
 routes.use("/users", userRoutes)
 routes.use("/pets", petsRoutes)
-routes.use("/stress", stressRoutes)
+// routes.use("/stress", stressRoutes)
 routes.use("/collar", collarRoutes)
 routes.use("/gps", gpsRoutes)
 routes.use("/sound", soundRoutes)
 routes.use("/acelerometer", acelerometerRoutes)
-routes.use("/heart-rate", heartRateRoutes)
+// routes.use("/heart-rate", heartRateRoutes)
 
 routes.use('/api-docs', swaggerUi.serve);
 routes.get('/api-docs', swaggerUi.setup(swaggerDocument));

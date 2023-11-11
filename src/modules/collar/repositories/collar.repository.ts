@@ -41,4 +41,14 @@ export class CollarRepository {
 
     return finded;
   }
+
+  async findCollarByToken(token: string): Promise<Collar | null> {
+    const finded = await prisma.collar.findFirst({
+      where: {
+        token
+      }
+    });
+
+    return finded;
+  }
 }

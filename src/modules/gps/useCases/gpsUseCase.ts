@@ -1,4 +1,4 @@
-import { GPS } from "@prisma/client";
+import { Collar, GPS } from "@prisma/client";
 import { AppError } from "../../../errors/AppError";
 import { logger } from "../../../utils/logger";
 import { GPSRepository } from "../repositories/gps.repository";
@@ -46,6 +46,18 @@ export class GPSUseCase {
 
     const repositories = new GPSRepository()
     const GPSFound = await repositories.findGPSById(id)
+
+    if (!GPSFound) {
+
+      throw new AppError("Not found", 404)
+    }
+    return GPSFound
+  }
+
+  async getGPSByToken (token: string): Promise<Collar> {
+
+    const repositories = new GPSRepository()
+    const GPSFound = await repositories.findGPSByToken(token)
 
     if (!GPSFound) {
 
