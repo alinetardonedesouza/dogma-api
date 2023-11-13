@@ -1,20 +1,24 @@
 import { Request, Response } from "express";
 import { logger } from "../../../utils/logger";
 import { SoundUseCase } from "../useCases/soundUseCase";
+import { CollarUseCase } from "../../collar/useCases/collarUseCase";
 
 export class SoundController {
     async create(req: Request, res: Response) {
 
-        const { collarId, value } = req.body;
+        const { token, value } = req.body;
 
-        if (!collarId || !value ) {
+        if (!token || !value ) {
             throw new Error("Paramêtros inválidos")
         }
+
+        const CollarUseCases = new CollarUseCase()
+        const collar = await CollarUseCases.getCollarByToken(token)
 
         const soundUseCases = new SoundUseCase();
 
         const result = await soundUseCases.create({
-            collarId,
+            collarId: collar.id,
             value
         });
 
