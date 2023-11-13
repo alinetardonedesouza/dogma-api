@@ -1,20 +1,24 @@
 import { Request, Response } from "express";
 import { logger } from "../../../utils/logger";
 import { AcelerometerUseCase } from "../useCases/acelerometerUseCase";
+import { CollarUseCase } from "../../collar/useCases/collarUseCase";
 
 export class AcelerometerController {
     async create(req: Request, res: Response) {
         logger.info(req.body)
-        const { collarId, x, y, z } = req.body;
+        const { token, x, y, z } = req.body;
 
-        if (!collarId || !x || !y || !z) {
+        if (!token || !x || !y || !z) {
             throw new Error("Paramêtros inválidos")
         }
+
+        const CollarUseCases = new CollarUseCase()
+        const collar = await CollarUseCases.getCollarByToken(token)
 
         const acelerometerUseCases = new AcelerometerUseCase();
 
         const result = await acelerometerUseCases.create({
-            collarId,
+            collarId: collar.id,
             x, y, z
         });
 
