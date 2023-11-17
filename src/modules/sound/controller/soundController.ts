@@ -56,17 +56,17 @@ export class SoundController {
         return res.status(200).json(result)
     }
 
-    async getSoundByCollarId(req: Request, res: Response) {
+    async getSoundByToken(req: Request, res: Response) {
 
-        const { collarId } = req.params;
+        const { token } = req.params;
 
-        if (!collarId) {
+        if (!token) {
             throw new Error("Paramêtros inválidos")
         }
 
         const soundUseCases = new SoundUseCase();
 
-        const result = await soundUseCases.getSoundByCollarId({ collarId });
+        const result = await soundUseCases.getSoundByToken( token );
 
         return res.status(200).json(result);
     }

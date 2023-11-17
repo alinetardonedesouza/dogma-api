@@ -1,6 +1,6 @@
 import { prisma } from "../../../database/prisma/client";
-import { Sound } from "@prisma/client";
-import { CreateSoundProps, DeleteSoundProps, GetSoundByCollarIdProps, GetSoundByIdProps, UpdateSoundProps } from "../dtos/soundDTOs";
+import { Collar, Sound } from "@prisma/client";
+import { CreateSoundProps, DeleteSoundProps, GetSoundByIdProps, GetSoundByTokenProps, UpdateSoundProps } from "../dtos/soundDTOs";
 
 export class SoundRepository {
 
@@ -33,14 +33,15 @@ export class SoundRepository {
     return deleted;
   }
 
-  async findSoundByCollarId(props: GetSoundByCollarIdProps): Promise<Sound[] | null> {
-    const finded = await prisma.sound.findMany({
-      where: {
-        collarId: props.collarId
-      }
+  async findSoundByToken(token: string): Promise<Collar[] | null> {
+    const collar = await prisma.collar.findMany({
+      where: { token },
+      include: {
+        sound: true,
+      },
     });
 
-    return finded;
+    return collar;
   }
 
   async findSoundById(props: GetSoundByIdProps): Promise<Sound | null> {

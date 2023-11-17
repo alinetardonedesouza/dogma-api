@@ -12,8 +12,8 @@ soundRoutes.route("/:id")
   .delete(soundController.delete)
   .get(soundController.getSoundById)
 
-soundRoutes.route("/:collarId")
-  .get(soundController.getSoundByCollarId)
+soundRoutes.route("/collar/:token")
+  .get(soundController.getSoundByToken)
 
   
 export { soundRoutes };

@@ -23,8 +23,8 @@ export interface DeleteSoundProps {
     id: string
 }
 
-export interface GetSoundByCollarIdProps {
-    collarId: string
+export interface GetSoundByTokenProps {
+    token: string
 }
 
 export interface GetSoundByIdProps {

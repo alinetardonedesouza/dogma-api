@@ -1,6 +1,6 @@
 import { prisma } from "../../../database/prisma/client";
 import { Collar, GPS } from "@prisma/client";
-import { CreateGPSProps, DeleteGPSProps, GetGPSByIdProps, GetGPSByTokenProps, UpdateGPSProps } from "../dtos/gpsDTOs";
+import { CreateGPSProps, DeleteGPSProps, GetGPSByIdProps, UpdateGPSProps } from "../dtos/gpsDTOs";
 
 export class GPSRepository {
 
