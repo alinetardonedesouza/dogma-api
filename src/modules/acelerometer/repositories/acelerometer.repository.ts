@@ -2,7 +2,13 @@ import { prisma } from "../../../database/prisma/client";
 import { Acelerometer, Collar } from "@prisma/client";
 import { CreateAcelerometerProps, UpdateAcelerometerProps, DeleteAcelerometerProps, GetAcelerometerByCollarIdProps, GetAcelerometerByIdProps } from "../dtos/acelerometerDTOs";
 import { logger } from "../../../utils/logger";
+import { AcelerometerCounts } from "../../../utils/acelerometerCounts";
 
+interface StatusObj {
+  id: string;
+  collarId: string;
+  status: string;
+}
 export class AcelerometerRepository {
 
   async createAcelerometer(props: CreateAcelerometerProps): Promise<Acelerometer> {
@@ -35,7 +41,7 @@ export class AcelerometerRepository {
     return deleted;
   }
 
-  async findAcelerometerByToken(token: string): Promise<Collar[] | null> {
+  async findAcelerometerByToken(token: string): Promise<StatusObj[] | null> {
     const collar = await prisma.collar.findMany({
       where: { token },
       include: {
@@ -43,7 +49,10 @@ export class AcelerometerRepository {
       },
     });
 
-    return collar;
+    const acelerometerCounts = new AcelerometerCounts()
+    const acelerometerData = acelerometerCounts.extrairDadosAcelerometro(collar[0].acelerometer)
+
+    return acelerometerData
   }
 
   async findAcelerometerById(props: GetAcelerometerByIdProps): Promise<Acelerometer | null> {

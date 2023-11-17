@@ -29,7 +29,7 @@ export class AcelerometerUseCase {
     return acelerometerDeleted
   }
 
-  async getAcelerometerByToken(token: string): Promise<Collar[]> {
+  async getAcelerometerByToken(token: string): Promise<Acelerometer[]> {
 
     const repositories = new AcelerometerRepository()
     const acelerometerFound = await repositories.findAcelerometerByToken(token)
