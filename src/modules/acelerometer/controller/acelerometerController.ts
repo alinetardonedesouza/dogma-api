@@ -56,17 +56,17 @@ export class AcelerometerController {
         return res.status(200).json(result)
     }
 
-    async getAcelerometerByCollarId(req: Request, res: Response) {
+    async getAcelerometerByToken(req: Request, res: Response) {
 
-        const { collarId } = req.params;
+        const { token } = req.params;
 
-        if (!collarId) {
+        if (!token) {
             throw new Error("Paramêtros inválidos")
         }
 
         const acelerometerUseCases = new AcelerometerUseCase();
 
-        const result = await acelerometerUseCases.getAcelerometerByCollarId({ collarId });
+        const result = await acelerometerUseCases.getAcelerometerByToken( token );
 
         return res.status(200).json(result);
     }

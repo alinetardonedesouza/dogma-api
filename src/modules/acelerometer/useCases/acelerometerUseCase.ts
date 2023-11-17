@@ -1,4 +1,4 @@
-import { Acelerometer } from "@prisma/client";
+import { Acelerometer, Collar } from "@prisma/client";
 import { AppError } from "../../../errors/AppError";
 import { logger } from "../../../utils/logger";
 import { AcelerometerRepository } from "../repositories/acelerometer.repository";
@@ -29,10 +29,10 @@ export class AcelerometerUseCase {
     return acelerometerDeleted
   }
 
-  async getAcelerometerByCollarId(collarId: GetAcelerometerByCollarIdProps): Promise<Acelerometer[]> {
+  async getAcelerometerByToken(token: string): Promise<Collar[]> {
 
     const repositories = new AcelerometerRepository()
-    const acelerometerFound = await repositories.findAcelerometerByCollarId(collarId)
+    const acelerometerFound = await repositories.findAcelerometerByToken(token)
 
     if (!acelerometerFound) {
 

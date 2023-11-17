@@ -1,5 +1,5 @@
 import { prisma } from "../../../database/prisma/client";
-import { Acelerometer } from "@prisma/client";
+import { Acelerometer, Collar } from "@prisma/client";
 import { CreateAcelerometerProps, UpdateAcelerometerProps, DeleteAcelerometerProps, GetAcelerometerByCollarIdProps, GetAcelerometerByIdProps } from "../dtos/acelerometerDTOs";
 import { logger } from "../../../utils/logger";
 
@@ -35,14 +35,15 @@ export class AcelerometerRepository {
     return deleted;
   }
 
-  async findAcelerometerByCollarId(props: GetAcelerometerByCollarIdProps): Promise<Acelerometer[] | null> {
-    const finded = await prisma.acelerometer.findMany({
-      where: {
-        collarId: props.collarId
-      }
+  async findAcelerometerByToken(token: string): Promise<Collar[] | null> {
+    const collar = await prisma.collar.findMany({
+      where: { token },
+      include: {
+        acelerometer: true,
+      },
     });
 
-    return finded;
+    return collar;
   }
 
   async findAcelerometerById(props: GetAcelerometerByIdProps): Promise<Acelerometer | null> {

@@ -12,8 +12,8 @@ acelerometerRoutes.route("/:id")
   .delete(acelerometerController.delete)
   .get(acelerometerController.getAcelerometerById)
 
-acelerometerRoutes.route("/:collarId")
-  .get(acelerometerController.getAcelerometerByCollarId)
+acelerometerRoutes.route("/collar/:token")
+  .get(acelerometerController.getAcelerometerByToken)
 
   
 export { acelerometerRoutes };
