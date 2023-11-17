@@ -33,7 +33,7 @@ export class SoundRepository {
     return deleted;
   }
 
-  async findSoundByToken(token: string): Promise<Collar[] | null> {
+  async findSoundByToken(token: string): Promise<Sound[] | null> {
     const collar = await prisma.collar.findMany({
       where: { token },
       include: {
@@ -41,7 +41,7 @@ export class SoundRepository {
       },
     });
 
-    return collar;
+    return collar.length > 0 ? collar[0].sound : null;
   }
 
   async findSoundById(props: GetSoundByIdProps): Promise<Sound | null> {
