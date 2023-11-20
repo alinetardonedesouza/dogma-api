@@ -3,6 +3,7 @@ import { Acelerometer, Collar } from "@prisma/client";
 import { CreateAcelerometerProps, UpdateAcelerometerProps, DeleteAcelerometerProps, GetAcelerometerByCollarIdProps, GetAcelerometerByIdProps } from "../dtos/acelerometerDTOs";
 import { logger } from "../../../utils/logger";
 import { AcelerometerCounts } from "../../../utils/acelerometerCounts";
+import { addHours, subHours } from 'date-fns';
 
 interface StatusObj {
   id: string;
@@ -14,7 +15,7 @@ export class AcelerometerRepository {
   async createAcelerometer(props: CreateAcelerometerProps): Promise<Acelerometer> {
     logger.info(props)
     const created = await prisma.acelerometer.create({
-      data: {...props}
+      data: { ...props }
     });
 
     return created;
@@ -42,17 +43,34 @@ export class AcelerometerRepository {
   }
 
   async findAcelerometerByToken(token: string): Promise<StatusObj[] | null> {
+
+    const now = new Date();
+    const oneHourAgo = subHours(now, 1);
+
     const collar = await prisma.collar.findMany({
-      where: { token },
+      where: {
+        token,
+      },
       include: {
-        acelerometer: true,
+        acelerometer: {
+          where: {
+            created_at: {
+              gte: oneHourAgo,
+              lte: now,
+            },
+          },
+        },
       },
     });
 
-    const acelerometerCounts = new AcelerometerCounts()
-    const acelerometerData = acelerometerCounts.extrairDadosAcelerometro(collar[0].acelerometer)
+    if (collar.length > 0) {
+      const acelerometerCounts = new AcelerometerCounts();
+      const acelerometerData = acelerometerCounts.extrairDadosAcelerometro(collar[0].acelerometer);
 
-    return acelerometerData
+      return acelerometerData;
+    } else {
+      return null;
+    }
   }
 
   async findAcelerometerById(props: GetAcelerometerByIdProps): Promise<Acelerometer | null> {

@@ -34,23 +34,9 @@ export class SoundRepository {
     return deleted;
   }
 
-  // async findSoundByToken(token: string): Promise<Sound[] | null> {
-  //   const collar = await prisma.collar.findMany({
-  //     where: { token },
-  //     include: {
-  //       sound: true,
-  //     },
-  //   });
-
-  //   return collar.length > 0 ? collar[0].sound : null;
-  // }
-
-
   async findSoundByToken(token: string): Promise<Sound[] | null> {
     const now = new Date();
     const oneHourAgo = subHours(now, 1);
-    console.log(oneHourAgo)
-    console.log(now)
 
     const collar = await prisma.collar.findMany({
       where: {

@@ -4,6 +4,11 @@ import { logger } from "../../../utils/logger";
 import { AcelerometerRepository } from "../repositories/acelerometer.repository";
 import { CreateAcelerometerProps, UpdateAcelerometerProps, DeleteAcelerometerProps, GetAcelerometerByCollarIdProps, GetAcelerometerByIdProps } from "../dtos/acelerometerDTOs";
 
+interface StatusObj {
+  id: string;
+  collarId: string;
+  status: string;
+}
 export class AcelerometerUseCase {
 
   async create(data: CreateAcelerometerProps): Promise<Acelerometer> {
@@ -29,7 +34,7 @@ export class AcelerometerUseCase {
     return acelerometerDeleted
   }
 
-  async getAcelerometerByToken(token: string): Promise<Acelerometer[]> {
+  async getAcelerometerByToken(token: string): Promise<StatusObj[]> {
 
     const repositories = new AcelerometerRepository()
     const acelerometerFound = await repositories.findAcelerometerByToken(token)
