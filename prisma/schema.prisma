@@ -62,9 +62,10 @@ model GPS {
 }
 
 model Sound {
-  id       String @id @default(uuid())
-  collarId String
-  value    Int
+  id         String   @id @default(uuid())
+  collarId   String
+  value      Int
+  created_at DateTime @default(now())
 
   Collar Collar? @relation(fields: [collarId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 
@@ -72,11 +73,12 @@ model Sound {
 }
 
 model Acelerometer {
-  id       String @id @default(uuid())
-  collarId String
-  x        String
-  y        String
-  z        String
+  id         String   @id @default(uuid())
+  collarId   String
+  x          String
+  y          String
+  z          String
+  created_at DateTime @default(now())
 
   Collar Collar? @relation(fields: [collarId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 

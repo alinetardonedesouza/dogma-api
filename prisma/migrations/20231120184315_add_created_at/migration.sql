@@ -1,0 +1,5 @@
+-- AlterTable
+ALTER TABLE "acelerometers" ADD COLUMN     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP;
+
+-- AlterTable
+ALTER TABLE "sounds" ADD COLUMN     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP;
