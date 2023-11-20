@@ -29,7 +29,7 @@ export class SoundUseCase {
     return soundDeleted
   }
 
-  async getSoundByToken(token: string): Promise<Collar[]> {
+  async getSoundByToken(token: string): Promise<Sound[]> {
 
     const repositories = new SoundRepository()
     const soundFound = await repositories.findSoundByToken(token)
