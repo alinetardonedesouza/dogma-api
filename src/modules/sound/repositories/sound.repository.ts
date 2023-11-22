@@ -1,7 +1,7 @@
 import { prisma } from "../../../database/prisma/client";
 import { Collar, Sound } from "@prisma/client";
 import { CreateSoundProps, DeleteSoundProps, GetSoundByIdProps, GetSoundByTokenProps, UpdateSoundProps } from "../dtos/soundDTOs";
-import { addHours, subHours } from 'date-fns'; // Você pode usar uma biblioteca de manipulação de datas, como date-fns
+import { addHours, subHours, startOfDay } from 'date-fns'; // Você pode usar uma biblioteca de manipulação de datas, como date-fns
 
 export class SoundRepository {
 
@@ -36,8 +36,8 @@ export class SoundRepository {
 
   async findSoundByToken(token: string): Promise<Sound[] | null> {
     const now = new Date();
-    const oneHourAgo = subHours(now, 1);
-
+    const startOfToday = startOfDay(now);
+  
     const collar = await prisma.collar.findMany({
       where: {
         token,
@@ -49,14 +49,13 @@ export class SoundRepository {
               gt: 170,
             },
             created_at: {
-              gte: oneHourAgo,
-              lte: now,
+              gte: startOfToday,
             },
           },
         },
       },
     });
-
+  
     return collar.length > 0 ? collar[0].sound : null;
   }
 
